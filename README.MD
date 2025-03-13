@@ -121,7 +121,7 @@ WantedBy=multi-user.target
 
 6. **Configure Nginx**:
 ```
-sudo nano /etc/nginx/sites-available/flower-classification
+sudo nano /etc/nginx/sites-available/flowers-classification
 ```
 
 Add the following content:
@@ -140,10 +140,10 @@ server {
 
 7. **Set up permissions and enable services**:
 ```
-sudo chown -R www-data:www-data /var/www/flower-classification
-sudo ln -s /etc/nginx/sites-available/flower-classification /etc/nginx/sites-enabled/
-sudo systemctl enable flower-classification
-sudo systemctl start flower-classification
+sudo chown -R www-data:www-data /var/www/flowers-classification
+sudo ln -s /etc/nginx/sites-available/flowers-classification /etc/nginx/sites-enabled/
+sudo systemctl enable flowers-classification
+sudo systemctl start flowers-classification
 sudo systemctl restart nginx
 ```
 
