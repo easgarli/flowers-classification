@@ -109,10 +109,10 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/var/www/flower-classification
-Environment="PATH=/var/www/flower-classification/venv/bin"
-Environment="PYTHONPATH=/var/www/flower-classification"
-ExecStart=/var/www/flower-classification/venv/bin/gunicorn -c gunicorn_config.py app:app
+WorkingDirectory=/var/www/flowers-classification
+Environment="PATH=/var/www/flowers-classification/venv/bin"
+Environment="PYTHONPATH=/var/www/flowers-classification"
+ExecStart=/var/www/flowers-classification/venv/bin/gunicorn -c gunicorn_config.py app:app
 Restart=always
 
 [Install]
