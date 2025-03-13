@@ -63,7 +63,7 @@ python app.py
 ### Prerequisites
 - Ubuntu 24.04 LTS server
 - Domain name pointed to your server
-- Python 3.8+
+- Python 3.10 (recommended for production)
 - Nginx
 - Gunicorn
 - Port 6062 available on the server
