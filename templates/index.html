@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flower Classification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        #preview {
+            max-width: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flower Classification</h1>
+        
+        <form id="upload-form">
+            <select name="model" id="model">
+                <option value="custom_cnn">Custom CNN</option>
+                <option value="vgg16">VGG16</option>
+                <option value="resnet152">ResNet152</option>
+            </select>
+            <br><br>
+            <input type="file" id="file" name="file" accept="image/*">
+            <br><br>
+            <button type="submit">Classify</button>
+        </form>
+
+        <img id="preview" style="display: none;">
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('file').addEventListener('change', function(e) {
+            const preview = document.getElementById('preview');
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('upload-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('file', document.getElementById('file').files[0]);
+            formData.append('model', document.getElementById('model').value);
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.error) {
+                    document.getElementById('result').innerHTML = `Error: ${data.error}`;
+                } else {
+                    document.getElementById('result').innerHTML = 
+                        `<h3>Prediction: ${data.prediction}</h3>
+                         <p>Confidence: ${(data.confidence * 100).toFixed(2)}%</p>`;
+                }
+            } catch (error) {
+                document.getElementById('result').innerHTML = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html> 
