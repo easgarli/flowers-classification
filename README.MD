@@ -60,8 +60,8 @@ python app.py
 ### Deployment Steps
 
 1. **Install system dependencies**:
-sudo apt update
-sudo apt install python3-pip python3-venv nginx
+* sudo apt update
+* sudo apt install python3-pip python3-venv nginx
 
 2. **Set up application directory**:
 sudo mkdir -p /var/www/flower-classification
