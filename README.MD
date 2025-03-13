@@ -33,8 +33,10 @@ This Flask application classifies images of flowers into five categories: daisy,
 
 1. **Clone the repository**:
 ```
+```
    git clone https://github.com/easgarli/flower-classification-app.git
    cd flower-classification-app
+```
 ```
 
 ## Create a virtual environment (recommended):
