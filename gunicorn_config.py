@@ -1,3 +1,3 @@
 workers = 2
-bind = "unix:/tmp/flower_classification.sock"
+bind = "127.0.0.1:6062"
 timeout = 120 

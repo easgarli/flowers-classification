@@ -66,6 +66,7 @@ python app.py
 - Python 3.8+
 - Nginx
 - Gunicorn
+- Port 6062 available on the server
 
 ### Deployment Steps
 
@@ -110,10 +111,12 @@ User=www-data
 Group=www-data
 WorkingDirectory=/var/www/flower-classification
 Environment="PATH=/var/www/flower-classification/venv/bin"
+Environment="PYTHONPATH=/var/www/flower-classification"
 ExecStart=/var/www/flower-classification/venv/bin/gunicorn -c gunicorn_config.py app:app
+Restart=always
 
 [Install]
-WantedBy=multi-target.target
+WantedBy=multi-user.target
 ```
 
 6. **Configure Nginx**:
@@ -128,7 +131,7 @@ server {
     server_name image-classification.elnurdevhub.com;
 
     location / {
-        proxy_pass http://unix:/tmp/flower_classification.sock;
+        proxy_pass http://127.0.0.1:6062;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
