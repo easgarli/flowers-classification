@@ -32,21 +32,29 @@ This Flask application classifies images of flowers into five categories: daisy,
 ## Local Development Setup
 
 1. **Clone the repository**:
+```
    git clone https://github.com/easgarli/flower-classification-app.git
    cd flower-classification-app
+```
 
 ## Create a virtual environment (recommended):
 
+```
 python -m venv env
 source env/bin/activate  # On Windows: env\Scripts\activate
+```
 
 ## Install dependencies:
 
+```
 pip install -r requirements.txt
+```
 
 ## Run the Flask app locally:
 
+```
 python app.py
+```
 
 ## Production Deployment
 
@@ -60,24 +68,34 @@ python app.py
 ### Deployment Steps
 
 1. **Install system dependencies**:
+```
 sudo apt update
 sudo apt install python3-pip python3-venv nginx
+```
 
 2. **Set up application directory**:
+```
 sudo mkdir -p /var/www/flower-classification
 sudo chown $USER:$USER /var/www/flower-classification
+```
 
 3. **Copy application files**:
+```
 cp -r * /var/www/flower-classification/
+```
 
 4. **Create virtual environment and install requirements**:
+```
 cd /var/www/flower-classification
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
 
 5. **Create systemd service**:
+```
 sudo nano /etc/systemd/system/flower-classification.service
+```
 
 Add the following content:
 ```ini
@@ -97,7 +115,9 @@ WantedBy=multi-target.target
 ```
 
 6. **Configure Nginx**:
+```
 sudo nano /etc/nginx/sites-available/flower-classification
+```
 
 Add the following content:
 ```nginx
@@ -114,15 +134,19 @@ server {
 ```
 
 7. **Set up permissions and enable services**:
+```
 sudo chown -R www-data:www-data /var/www/flower-classification
 sudo ln -s /etc/nginx/sites-available/flower-classification /etc/nginx/sites-enabled/
 sudo systemctl enable flower-classification
 sudo systemctl start flower-classification
 sudo systemctl restart nginx
+```
 
 8. **Set up SSL (recommended)**:
+```
 sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d image-classification.elnurdevhub.com
+```
 
 
 ## API Usage
